@@ -19,9 +19,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4 # 检出你的仓库
 
-      - name: Setup PowerShell
-        uses: actions/setup-powershell@v1 # 设置 PowerShell 环境
-
       - name: Configure Git
         run: |
           git config --global user.name "GitHub Actions"
