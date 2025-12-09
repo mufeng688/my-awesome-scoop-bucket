@@ -1,0 +1,30 @@
+{
+    "version": "5.0.0",
+    "description": "Define and run multi-container applications with Docker",
+    "homepage": "https://docs.docker.com/compose/",
+    "license": "Apache-2.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/docker/compose/releases/download/v5.0.0/docker-compose-windows-x86_64.exe#/docker-compose.exe",
+            "hash": "e8a5338e20bc6d30ae38db5533ce63ebf3c229801c20a74051fd06a650e5a8f9"
+        }
+    },
+    "bin": "docker-compose.exe",
+    "post_install": "echo 'Installing docker-compose as docker-cli plugin...'; New-Item -ItemType Directory -Force \"$Env:USERPROFILE/.docker/cli-plugins\" | Out-Null; Copy-Item \"$original_dir/docker-compose.exe\" \"$Env:USERPROFILE/.docker/cli-plugins/docker-compose.exe\"",
+    "uninstaller": {
+        "script": "Remove-Item -Force \"$Env:USERPROFILE/.docker/cli-plugins/docker-compose.exe\""
+    },
+    "checkver": {
+        "github": "https://github.com/docker/compose"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/docker/compose/releases/download/v$version/docker-compose-windows-x86_64.exe#/docker-compose.exe"
+            }
+        },
+        "hash": {
+            "url": "$url.sha256"
+        }
+    }
+}

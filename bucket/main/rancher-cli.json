@@ -1,0 +1,33 @@
+{
+    "version": "2.13.0",
+    "description": "Unified tool for interacting with Rancher Server",
+    "homepage": "https://github.com/rancher/cli",
+    "license": "Apache-2.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/rancher/cli/releases/download/v2.13.0/rancher-windows-amd64-v2.13.0.zip",
+            "hash": "cf28a3e4b9c31c2dc189cbf3714760ca0ffda884efc0d41a3eec3453eeabf8de"
+        },
+        "32bit": {
+            "url": "https://github.com/rancher/cli/releases/download/v2.13.0/rancher-windows-386-v2.13.0.zip",
+            "hash": "48cee322392114fa8c4c0415cbc88f25fcae1bf8974c21e3941174039b204d13"
+        }
+    },
+    "extract_dir": "rancher-v2.13.0",
+    "bin": "rancher.exe",
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/rancher/cli/releases/download/v$version/rancher-windows-amd64-v$version.zip"
+            },
+            "32bit": {
+                "url": "https://github.com/rancher/cli/releases/download/v$version/rancher-windows-386-v$version.zip"
+            }
+        },
+        "hash": {
+            "url": "$baseurl/sha256sum.txt"
+        },
+        "extract_dir": "rancher-v$version"
+    }
+}

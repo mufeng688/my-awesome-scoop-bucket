@@ -1,0 +1,47 @@
+{
+    "version": "0.65.0",
+    "description": "OpenAI's Codex AI coding assistant",
+    "homepage": "https://github.com/openai/codex",
+    "license": "Apache-2.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/openai/codex/releases/download/rust-v0.65.0/codex-x86_64-pc-windows-msvc.exe.zip",
+            "hash": "ed0612bd69f65198ab7288d242014f6461fb5700dcf37fcc5dc9ace0b45c4baf"
+        },
+        "arm64": {
+            "url": "https://github.com/openai/codex/releases/download/rust-v0.65.0/codex-aarch64-pc-windows-msvc.exe.zip",
+            "hash": "8d70a2f117bdaa9646198757c3350923c7fd9e61fd15b5869e51a288f88df9c3"
+        }
+    },
+    "pre_install": "Get-Item \"$dir\\codex-*.exe\" | Rename-Item -NewName \"$dir\\codex.exe\"",
+    "bin": [
+        [
+            "codex.exe",
+            "codex"
+        ]
+    ],
+    "checkver": {
+        "url": "https://api.github.com/repos/openai/codex/releases",
+        "regex": "rust-v(\\d+\\.\\d+\\.\\d+)(?![^\\d]*alpha|[^\\d]*beta|[^\\d]*rc|[^\\d]*preview)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/openai/codex/releases/download/rust-v$version/codex-x86_64-pc-windows-msvc.exe.zip",
+                "hash": {
+                    "url": "https://api.github.com/repos/openai/codex/releases",
+                    "jsonpath": "$[?(@.tag_name=='rust-v$version')].assets[?(@.name=='codex-x86_64-pc-windows-msvc.exe.zip')].digest",
+                    "regex": "(?<=sha256:)([a-fA-F0-9]{64})"
+                }
+            },
+            "arm64": {
+                "url": "https://github.com/openai/codex/releases/download/rust-v$version/codex-aarch64-pc-windows-msvc.exe.zip",
+                "hash": {
+                    "url": "https://api.github.com/repos/openai/codex/releases",
+                    "jsonpath": "$[?(@.tag_name=='rust-v$version')].assets[?(@.name=='codex-aarch64-pc-windows-msvc.exe.zip')].digest",
+                    "regex": "(?<=sha256:)([a-fA-F0-9]{64})"
+                }
+            }
+        }
+    }
+}

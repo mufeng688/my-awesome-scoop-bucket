@@ -1,0 +1,50 @@
+{
+    "version": "2025.12.07.235946",
+    "description": "yt-dlp (official) master builds",
+    "homepage": "https://github.com/yt-dlp/yt-dlp-master-builds",
+    "license": "Freeware",
+    "suggest": {
+        "ffmpeg": [
+            "versions/ffmpeg-yt-dlp-nightly",
+            "versions/ffmpeg-shared-yt-dlp-nightly"
+        ]
+    },
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/yt-dlp/yt-dlp-master-builds/releases/download/2025.12.07.235946/yt-dlp.exe",
+            "hash": "sha512:de8a6635f81074340c310fbfe39db59900a5611e4168719efdb778e5980bf5beb23bb8e99628d79c038be31be1b56501e2117106072f4f2534b491b7a579415d"
+        },
+        "32bit": {
+            "url": "https://github.com/yt-dlp/yt-dlp-master-builds/releases/download/2025.12.07.235946/yt-dlp_x86.exe#/yt-dlp.exe",
+            "hash": "sha512:199e0e1d00c33d98f8e59a94a556d1692261a978d6ad1451d5802ae9c225b5896699fc903ab4c3dd9798e65123e1e81353e61dac249a932290ebce1f88ad8c78"
+        },
+        "arm64": {
+            "url": "https://github.com/yt-dlp/yt-dlp-master-builds/releases/download/2025.12.07.235946/yt-dlp_arm64.exe#/yt-dlp.exe",
+            "hash": "sha512:715e7962da1fedb36600a6b3e3c171d6c97cafe98e47e94022bbd0e603512862af01b0cfa9a5a848edc11d3872238cd50807a1c649c9a1e4fd57dc320faa2f2a"
+        }
+    },
+    "bin": "yt-dlp.exe",
+    "pre_install": "$null = if (!(Test-Path \"$persist_dir/yt-dlp.conf\")) { New-Item \"$dir/yt-dlp.conf\" }",
+    "persist": [
+        "yt-dlp.conf",
+        "ytdlp_plugins",
+        "yt-dlp-plugins"
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/yt-dlp/yt-dlp-master-builds/releases/download/$version/yt-dlp.exe"
+            },
+            "32bit": {
+                "url": "https://github.com/yt-dlp/yt-dlp-master-builds/releases/download/$version/yt-dlp_x86.exe#/yt-dlp.exe"
+            },
+            "arm64": {
+                "url": "https://github.com/yt-dlp/yt-dlp-master-builds/releases/download/$version/yt-dlp_arm64.exe#/yt-dlp.exe"
+            }
+        },
+        "hash": {
+            "url": "$baseurl/SHA2-512SUMS"
+        }
+    }
+}
