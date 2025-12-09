@@ -1,0 +1,35 @@
+# .github/workflows/sync-buckets.yml
+
+name: Sync Scoop Buckets
+
+on:
+  schedule:
+    # 每天 UTC 时间凌晨 3:00 运行
+    # 你可以根据需要调整这个 cron 表达式
+    # 更多关于 cron 表达式的信息: https://crontab.guru/
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+    # 允许手动触发工作流
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest # 使用 Ubuntu 环境运行
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # 检出你的仓库
+
+      - name: Setup PowerShell
+        uses: actions/setup-powershell@v1 # 设置 PowerShell 环境
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Run Sync Script
+        run: pwsh -File ./sync.ps1
+        env:
+          # 用于推送更改到 GitHub 仓库的令牌
+          # GitHub Actions 会自动提供 GITHUB_TOKEN，无需手动创建
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
